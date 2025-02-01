@@ -199,7 +199,7 @@ jobs:
       #     CLI# https://docs.jfrog-applications.jfrog.io/jfrog-applications/jfrog-cli/binaries-management-with-jfrog-artifactory/evidence-service
       - name: "Evidence: Package"
         run: |
-          echo "{ \"actor\": \"krishnamanchikalapudi\", \"date\": \"$(date '+%Y-%m-%dT%H:%M:%SZ')\", \"build_name\": \"${{ env.BUILD_NAME }}\", \"build_id\": \"${{ env.BUILD_ID}}\", \"evd\":\"Evidence-Package\", \"package\":\"${{env.RT_REPO_DOCKER_URL}}\" }" > ${VAR_EVD_PACKAGE_JSON}
+          echo "{ \"actor\": \"krishnamanchikalapudi\", \"date\": \"$(date '+%Y-%m-%dT%H:%M:%SZ')\", \"build_name\": \"${{ env.BUILD_NAME }}\", \"build_id\": \"${{ env.BUILD_ID}}\", \"evd\":\"Evidence-Package\", \"package\":\"${{env.RT_REPO_DOCKER_URL}}\" }" > ${{env.EVD_PACKAGE_JSON}}
           cat ./${{env.EVD_PACKAGE_JSON}}
           jf evd create --predicate ./${{env.EVD_PACKAGE_JSON}} --predicate-type https://jfrog.com/evidence/build-signature/v1 --package-name ${{env.BUILD_NAME}} --package-version ${{env.BUILD_ID}} --package-repo-name ${{env.RT_REPO_DOCKER_VIRTUAL}} --key ${{vars.KRISHNAM_JFROG_EVD_PRIVATEKEY}} --key-alias ${{vars.EVD_SIGNING_KEY}}
           echo "🔎 Evidence attached on Package: signature 🔏 "
